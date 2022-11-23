@@ -13,7 +13,7 @@ class Playlist extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 7.w, right: 7.w, top: 0.5.h),
       child: Container(
-        height: 7.h,
+        height: 8.h,
         width: double.infinity,
         
         child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,8 +24,8 @@ class Playlist extends StatelessWidget {
               decoration: AppConstant().profilePhoto(imagePath, 10) ,
             ),
             Container(
-              height: 7.h,
-              width: 45.w,
+              height: 8.h,
+              width: 55.w,
               
               child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +36,7 @@ class Playlist extends StatelessWidget {
                 ],
               ),
             ),
-            Text("5:33"),
+            
             Icon(Icons.more_horiz_rounded, color: Colors.grey.shade400,),
           ],
         ),

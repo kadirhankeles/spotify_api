@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/screens/profile_screen.dart';
 
 void main() {
   runApp(MultiProvider(child: MyApp(),providers:[
-    ChangeNotifierProvider(create:(context) => ProfileProvider(),
-    )
+    ChangeNotifierProvider(create:(context) => ProfileProvider(),),
+    ChangeNotifierProvider(create: (context) => PlaylistProvider(),),
   ]));
 }
 
