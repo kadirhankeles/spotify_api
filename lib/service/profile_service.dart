@@ -5,11 +5,12 @@ import 'package:http/http.dart' as http;
 import '../models/profile_model.dart';
 
 Future<ProfileModel> getProfileService() async {
+  String apiKey = "BQAurk6Jvp8AjPBUSx8YGb-JBDZiTojUyfMOEQCHehBHjuOJEqZER4G67HGBDUZ89dFaFXo75jA_zoU4ag3fODqCsg65s9Utsxo0Pm7ady78HQfGuNTrLt0XwNH0jqzxPhPguThrfwy_T_sFyINL5p9Ir7Tmnm1V3juuwmR2TF0_G_URwh60byYQCgU_ZGBhYACgFFVw6qqgDkLc07paHgSxshA8pJUYYDqp4U0l6iHSkwasXrVkToW3MHbcdwDvmbfPi8X-QEIXcQWaQd1CRk0IHUoMOrlUxuY_qWDaGrcVa29uEM51piWG2igWS8GTLXxV";
   ProfileModel? data = ProfileModel();
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer BQBDjix_mCvMWGKbYP5ADlRauriD_AN-7JKOdXzjm6-gYy07fdr8AcpRNb7DqlGcSl0xekZXva5LKeQrY1rZvy6oHt85vOjsdGLmhV_DeCB82H5eyiXm5ogYjIl7EsOid06cWbmPAot34w4o9C48pSEwOPcKlWIHgNIMNrPCQL8kwodGP8aE6dJEnASo3KkjtYTjdtu0kR8GGiClsICB00dUTq_QIbIziAT5m4cAcPacVYLV5PFgjSv6IknEc5FBVM1m4UPVNz4MmeBR6mVOGP86DTDXoFXji4QLEXwjHS3h',
+    'Authorization': 'Bearer $apiKey',
   };
 
   var url = Uri.parse('https://api.spotify.com/v1/me');

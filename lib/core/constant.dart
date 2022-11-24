@@ -15,6 +15,17 @@ class AppConstant {
   final artistStyle = GoogleFonts.openSans(
     fontSize: 13,
   );
+  //BANNER
+  final bannerStyle = BoxDecoration(color: Color(0xff42C83C), borderRadius: BorderRadius.circular(20));
+  final bannerTextSmall = GoogleFonts.openSans(color: Colors.white, fontSize: 10,);
+  final bannerTextBig = GoogleFonts.openSans(color: Colors.white, fontSize: 19, fontWeight: FontWeight.bold);
+  final bannerTextMedium = GoogleFonts.openSans(color: Colors.white, fontSize: 13,);
+  
+  //CATEGORY
+  final categoryStyle = GoogleFonts.openSans(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500);
+
+  final baslikStyle =
+      GoogleFonts.openSans(fontSize: 20, fontWeight: FontWeight.bold);
 
   BoxDecoration profilePhoto(String path, double radius) {
     return BoxDecoration(
@@ -23,4 +34,5 @@ class AppConstant {
         borderRadius: BorderRadius.circular(radius),
         );
   }
+
 }

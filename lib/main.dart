@@ -3,12 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
+import 'package:spotify_api/providers/releases_provider.dart';
+import 'package:spotify_api/screens/home_screen.dart';
 import 'package:spotify_api/screens/profile_screen.dart';
 
 void main() {
   runApp(MultiProvider(child: MyApp(),providers:[
     ChangeNotifierProvider(create:(context) => ProfileProvider(),),
     ChangeNotifierProvider(create: (context) => PlaylistProvider(),),
+    ChangeNotifierProvider(create: (context) => ReleasesProvider(),),
   ]));
 }
 
@@ -31,7 +34,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: ProfileScreen(),
+          home: HomeScreen(),
         );
       },
       maxTabletWidth: 900, // Optional

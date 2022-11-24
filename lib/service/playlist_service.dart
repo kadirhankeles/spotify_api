@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:spotify_api/models/playlist_model.dart';
 
 Future<PlaylistModel> getPlaylistService() async {
+  String apiKey="BQCb6-mKLE7zOliwpjvNRURgvUghK9yw2FiJ3YB2RDY73UqzYW3A2SPUxZjmeZ3ZDA_i89Lekd6bn3SDzU3zy28U_ORf_UySjiW3yTOXVcGxDevv1aQz7Uxaftn183FhMELz-8E4WK-EEvSy-v6ogx2aitYpjiSg2TmpxRX1x1QWmSS6ilGMP2GVpLPTdyikZubCP3IlOjmODo7Abel9j46tSIMA-FxqSBtxacvDhzempVFYlKPmwp7VxgTyUUURGG6R41FLA6GQhjoQ5HDMwYuxXimAUiTeeVD__yR0Jg1R";
   PlaylistModel playlistData =PlaylistModel();
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer BQCCqPw-2z_a7tG0NQh2i9yYO9Wm1LqddejmzoieeI9eHVfnMOWa5g9oLBQHqz8dIghSz16uFn7VQqaZsYPXXK0e0m2mxPvBwMtlBKCG2Lg1UzMD9Bt81_EigOEwEbCQGibfGFztJkB8T4OHohYxJKmlr5R1jZXtxfEkdx4Pk3PCS1wDiabFrLHL2vBb6FGoNXTvx5Mvc-LpGAvUmh67wzm4CWlB6c5PDbxjuDh3_X4JTWQ4glUTfxzYdAviCeY0s9hKNKH-4-KL6lx9-wbzBpm3xeREAXt9ROk0tIGyga64',
+    'Authorization': 'Bearer $apiKey',
   };
 
   var params = {
