@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:spotify_api/providers/artist_album_provider.dart';
+import 'package:spotify_api/providers/artist_provider.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
+import 'package:spotify_api/providers/top_track_provider.dart';
+import 'package:spotify_api/screens/artist_screen.dart';
 import 'package:spotify_api/screens/home_screen.dart';
 import 'package:spotify_api/screens/profile_screen.dart';
 
@@ -12,6 +16,9 @@ void main() {
     ChangeNotifierProvider(create:(context) => ProfileProvider(),),
     ChangeNotifierProvider(create: (context) => PlaylistProvider(),),
     ChangeNotifierProvider(create: (context) => ReleasesProvider(),),
+    ChangeNotifierProvider(create: (context) => TopTracksProvider(),),
+    ChangeNotifierProvider(create: (context) => ArtistProvider(),),
+    ChangeNotifierProvider(create: (context) => ArtistAlbumProvider(),),
   ]));
 }
 

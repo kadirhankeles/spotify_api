@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
+import 'package:spotify_api/providers/top_track_provider.dart';
+import 'package:spotify_api/service/releases_service.dart';
+import 'package:spotify_api/service/top_track_service.dart';
 import 'package:spotify_api/widgets/homescreen_banner.dart';
 import 'package:spotify_api/widgets/homescreen_category.dart';
 import 'package:spotify_api/widgets/homescreen_playlist.dart';
@@ -19,13 +22,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String id = "3VooEK5HkkcSc4Tv7FCBzb";
   ReleasesProvider? releasesData;
+  TopTracksProvider? topTracksData;
 
   @override
   void initState() {
     super.initState();
     releasesData = Provider.of<ReleasesProvider>(context, listen: false);
     releasesData!.GetReleasesData();
+
+    topTracksData = Provider.of<TopTracksProvider>(context, listen: false);
+    topTracksData!.GetTopTracksData(id);
   }
 
   List<String> categoryName = ["News", "Video", "Artist", "Podcast"];
@@ -81,13 +89,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount:
                                 value.releasesData!.albums!.items!.length,
                             itemBuilder: (context, index) {
-                              return HSong(
-                                imagePath:
-                                    '${value.releasesData!.albums!.items![index].images![0].url}',
-                                songName:
-                                    '${value.releasesData!.albums!.items![index].name}',
-                                artist:
-                                    '${value.releasesData!.albums!.items![index].artists![0].name}',
+                              return GestureDetector(
+                                onTap: () {
+                                  id = value.releasesData!.albums!.items![index]
+                                      .artists![0].id
+                                      .toString();
+                                      print("ID: "+id);
+                                  topTracksData!.GetTopTracksData(id);
+                                 // print(id);
+                                },
+                                child: HSong(
+                                  imagePath:
+                                      '${value.releasesData!.albums!.items![index].images![0].url}',
+                                  songName:
+                                      '${value.releasesData!.albums!.items![index].name}',
+                                  artist:
+                                      '${value.releasesData!.albums!.items![index].artists![0].name}',
+                                  id: value.releasesData!.albums!.items![index]
+                                      .artists![0].id
+                                      .toString(),
+                                ),
                               );
                             },
                           )
@@ -105,19 +126,30 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 2.h,
               ),
-              Container(
-                child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 8,
-                    itemBuilder: (context, index) {
-                      return HPlaylist();
-                    },
-                  ),
-                ),
+              Consumer(
+                builder: (context, TopTracksProvider value, child) {
+                  return Container(
+                    child: MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: value.isTopTracksDataLoaded == true
+                          ? ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: value.topTracksData!.tracks!.length,
+                              itemBuilder: (context, index) {
+                                return HPlaylist(
+                                  songName:
+                                      '${value.topTracksData!.tracks![index].name}',
+                                  artist:
+                                      '${value.topTracksData!.tracks![index].artists![0].name}',
+                                );
+                              },
+                            )
+                          : Container(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

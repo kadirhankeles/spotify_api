@@ -3,7 +3,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 
 class HPlaylist extends StatefulWidget {
-  const HPlaylist({super.key});
+  final String songName;
+  final String artist;
+  const HPlaylist({super.key, required this.songName, required this.artist});
 
   @override
   State<HPlaylist> createState() => _HPlaylistState();
@@ -29,8 +31,8 @@ class _HPlaylistState extends State<HPlaylist> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("As It Well", style: AppConstant().araBaslikStyle,),
-                Text("Harry Styles", style: AppConstant().artistStyle,),
+                Text("${widget.songName}", style: AppConstant().araBaslikStyle,),
+                Text("${widget.artist}", style: AppConstant().artistStyle,),
               ],
             ),
           ),

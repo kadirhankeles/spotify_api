@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:spotify_api/core/api_key.dart';
-import 'package:spotify_api/models/playlist_model.dart';
+import 'package:spotify_api/models/artist_album_model.dart';
 
-Future<PlaylistModel> getPlaylistService() async {
-
-  PlaylistModel playlistData =PlaylistModel();
+Future<ArtistAlbumModel> getArtistAlbumService(String id) async {
+  
+  ArtistAlbumModel? artistAlbumData = ArtistAlbumModel();
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -14,14 +14,17 @@ Future<PlaylistModel> getPlaylistService() async {
   };
 
   var params = {
-    'limit': '20',
-    'offset': '0',
+    'include_groups': 'single,appears_on',
+    'market': 'TR',
+    'limit': '10',
+    'offset': '5',
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  var url = Uri.parse('https://api.spotify.com/v1/users/8kdfzahazbluvjd5tc99367gz/playlists?$query');
+  var url = Uri.parse('https://api.spotify.com/v1/artists/$id/albums?$query');
   var res = await http.get(url, headers: headers);
   if (res.statusCode != 200) throw Exception('http.get error: statusCode= ${res.statusCode}');
-  playlistData = PlaylistModel.fromJson(jsonDecode(res.body));
-  return playlistData;
+  artistAlbumData = ArtistAlbumModel.fromJson(jsonDecode(res.body));
+  return artistAlbumData;
+
 }

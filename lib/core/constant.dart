@@ -24,6 +24,10 @@ class AppConstant {
   //CATEGORY
   final categoryStyle = GoogleFonts.openSans(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500);
 
+
+  //ARTİST
+  final albumsStyle = GoogleFonts.openSans(color: Colors.black, fontSize: 12, fontWeight: FontWeight.w600);
+
   final baslikStyle =
       GoogleFonts.openSans(fontSize: 20, fontWeight: FontWeight.bold);
 
@@ -32,6 +36,13 @@ class AppConstant {
         color: Colors.black,
         image: DecorationImage(image: NetworkImage(path), fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(radius),
+        );
+  }
+  BoxDecoration artistPhoto(String path, double radius) {
+    return BoxDecoration(
+        color: Colors.black,
+        image: DecorationImage(image: NetworkImage(path), fit: BoxFit.cover),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(radius), bottomRight: Radius.circular(radius) ),
         );
   }
 
