@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
+import 'package:spotify_api/screens/artist_screen.dart';
 
 class HPlaylist extends StatefulWidget {
+  final String id;
   final String songName;
   final String artist;
-  const HPlaylist({super.key, required this.songName, required this.artist});
+  const HPlaylist({super.key, required this.songName, required this.artist, required this.id});
 
   @override
   State<HPlaylist> createState() => _HPlaylistState();
@@ -31,8 +33,12 @@ class _HPlaylistState extends State<HPlaylist> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("${widget.songName}", style: AppConstant().araBaslikStyle,),
-                Text("${widget.artist}", style: AppConstant().artistStyle,),
+                Text("${widget.songName}", style: AppConstant().araBaslikStyle,maxLines: 1,overflow: TextOverflow.ellipsis,),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ArtistScreen(id: widget.id),));
+                  },
+                  child: Text("${widget.artist}", style: AppConstant().artistStyle,)),
               ],
             ),
           ),

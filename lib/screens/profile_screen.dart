@@ -5,6 +5,8 @@ import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/widgets/playlist.dart';
+import 'package:spotify_api/widgets/shimmer_playlist.dart';
+import 'package:spotify_api/widgets/shimmer_profile_photo.dart';
 import 'package:spotify_api/widgets/top_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -29,8 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return  SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     takipEdilenSayisi: value.profileData!.followers!.total!.toInt(),
                     takipciSayisi: 300);
                 } else {
-                  return Container();
+                  return SProfilePhoto();
                 }
               },
             ),
@@ -81,14 +82,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         artistName: '${value.playlistData!.items![index].owner!.displayName}',
                       );
                     },
-                  ):Container();
+                  ):SPlaylist();
                   },
                 ),
               ),
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }

@@ -6,7 +6,7 @@ import '../core/api_key.dart';
 import '../models/profile_model.dart';
 
 Future<ProfileModel> getProfileService() async {
-
+  
   ProfileModel? data = ProfileModel();
   var headers = {
     'Accept': 'application/json',

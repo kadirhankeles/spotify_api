@@ -24,5 +24,4 @@ Future<TopTracksModel> getTopTracksService(String id) async {
   if (res.statusCode != 200) throw Exception('http.get error: statusCode= ${res.statusCode}');
   data = TopTracksModel.fromJson(jsonDecode(res.body));
   return data;
-  print(res.body);
 }

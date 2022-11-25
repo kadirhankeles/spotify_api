@@ -43,7 +43,7 @@ class _HSongState extends State<HSong> {
                   print("Gelen id: "+widget.id);
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ArtistScreen(id: widget.id,),));
                 },
-                child: Text("${widget.artist}", style: AppConstant().artistStyle,)),
+                child: Text("${widget.artist}", style: AppConstant().artistStyle, )),
             ),
           ],
         ),

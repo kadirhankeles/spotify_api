@@ -4,6 +4,8 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
 import 'package:spotify_api/providers/top_track_provider.dart';
+import 'package:spotify_api/screens/artist_screen.dart';
+import 'package:spotify_api/screens/profile_screen.dart';
 import 'package:spotify_api/service/releases_service.dart';
 import 'package:spotify_api/service/top_track_service.dart';
 import 'package:spotify_api/widgets/homescreen_banner.dart';
@@ -11,6 +13,8 @@ import 'package:spotify_api/widgets/homescreen_category.dart';
 import 'package:spotify_api/widgets/homescreen_playlist.dart';
 import 'package:spotify_api/widgets/homescreen_song.dart';
 import 'package:spotify_api/widgets/homescreen_topbar.dart';
+import 'package:spotify_api/widgets/shimmer_playlist.dart';
+import 'package:spotify_api/widgets/shimmer_song.dart';
 
 import '../providers/profile_provider.dart';
 
@@ -22,13 +26,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   String id = "3VooEK5HkkcSc4Tv7FCBzb";
   ReleasesProvider? releasesData;
   TopTracksProvider? topTracksData;
+  
 
   @override
   void initState() {
-    super.initState();
+    
+    super.initState();Future.delayed(Duration(seconds: 5));
     releasesData = Provider.of<ReleasesProvider>(context, listen: false);
     releasesData!.GetReleasesData();
 
@@ -39,8 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> categoryName = ["News", "Video", "Artist", "Podcast"];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 3.h, right: 3.h),
           child: Column(
@@ -89,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount:
                                 value.releasesData!.albums!.items!.length,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
+                              return  GestureDetector(
                                 onTap: () {
                                   id = value.releasesData!.albums!.items![index]
                                       .artists![0].id
@@ -112,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           )
-                        : Container(),
+                        : SSong(),
                   );
                 },
               ),
@@ -138,15 +144,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               shrinkWrap: true,
                               itemCount: value.topTracksData!.tracks!.length,
                               itemBuilder: (context, index) {
-                                return HPlaylist(
-                                  songName:
-                                      '${value.topTracksData!.tracks![index].name}',
-                                  artist:
-                                      '${value.topTracksData!.tracks![index].artists![0].name}',
+                                return GestureDetector(
+                                  onTap: () {
+                                    id = value.topTracksData!.tracks![index].artists![0].id.toString();
+                                    
+                                  },
+                                  child: HPlaylist(
+                                    songName:
+                                        '${value.topTracksData!.tracks![index].name}',
+                                    artist:
+                                        '${value.topTracksData!.tracks![index].artists![0].name}', id: value.topTracksData!.tracks![index].artists![0].id.toString(),
+                                  ),
                                 );
                               },
                             )
-                          : Container(),
+                          : SPlaylist(),
                     ),
                   );
                 },
@@ -154,7 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
+      
+    
   }
 }

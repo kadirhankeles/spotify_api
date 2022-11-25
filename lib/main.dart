@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/providers/artist_album_provider.dart';
 import 'package:spotify_api/providers/artist_provider.dart';
+import 'package:spotify_api/providers/main_provider.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
@@ -19,6 +20,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => TopTracksProvider(),),
     ChangeNotifierProvider(create: (context) => ArtistProvider(),),
     ChangeNotifierProvider(create: (context) => ArtistAlbumProvider(),),
+    ChangeNotifierProvider(create: (context) => MainProvider(),),
   ]));
 }
 
@@ -41,7 +43,7 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: HomeScreen(),
+          home: MyHomePage(),
         );
       },
       maxTabletWidth: 900, // Optional
@@ -50,54 +52,57 @@ class _MyAppState extends State<MyApp> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, });
 
   
 
-  final String title;
+  
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-     
-      _counter++;
-    });
-  }
-
+  
+  
+  final List<Widget> _choice = [
+    HomeScreen(),
+    ArtistScreen(id: "3VooEK5HkkcSc4Tv7FCBzb",),
+    ProfileScreen(),
+  ];
+  
   @override
   Widget build(BuildContext context) {
    
-    return Scaffold(
-      appBar: AppBar(
-       
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-         
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return Consumer(
+      builder: (context, MainProvider value, child) {
+        return Scaffold(
+       bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_max, size: 36,),
+              label: ""
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search, size: 36,),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person, size: 36,),
+              label: '',
             ),
           ],
+          currentIndex: value.selectedIndex,
+          selectedItemColor: Colors.green[400],
+       onTap: (de) {
+         
+         value.onItemTapped(de);
+       },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        body:  _choice[value.selectedIndex]
+    ,
+      );
+      },
     );
   }
 }

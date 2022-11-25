@@ -27,7 +27,13 @@ class _AInfoState extends State<AInfo> {
               width: double.infinity,
               decoration: AppConstant().artistPhoto("${widget.imagePath}", 60),
             ),
-            Positioned(child: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back_ios_new)), top: 2.h, left: 0.5.h,)
+            Positioned(child: Container(
+              padding: EdgeInsets.only(left: 0.5.h),
+              height: 5.h,
+              width: 5.h,
+              decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white.withOpacity(0.8),),
+              
+              child: IconButton(onPressed: () => Navigator.of(context).pop(), icon: Icon(Icons.arrow_back_ios))), top: 2.h, left: 2.h,)
             ]
           ),
           SizedBox(height: 1.h,),
