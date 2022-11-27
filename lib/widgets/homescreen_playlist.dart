@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/screens/artist_screen.dart';
@@ -36,7 +37,8 @@ class _HPlaylistState extends State<HPlaylist> {
                 Text("${widget.songName}", style: AppConstant().araBaslikStyle,maxLines: 1,overflow: TextOverflow.ellipsis,),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ArtistScreen(id: widget.id),));
+                    print("Giden id: "+ widget.id);
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => ArtistScreen(id: widget.id,),));
                   },
                   child: Text("${widget.artist}", style: AppConstant().artistStyle,)),
               ],

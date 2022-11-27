@@ -50,7 +50,7 @@ class TopProfile extends StatelessWidget {
               Container(
                 height: 10.h,
                 width: 10.h,
-                decoration: AppConstant().profilePhoto("$imagePath",50),
+                child: AppConstant().profilePhotos("$imagePath", 50),
               ),
               SizedBox(height: 1.5.h,),
               Text("$email", style: AppConstant().emailStyle ,),

@@ -8,6 +8,7 @@ import 'package:spotify_api/providers/top_track_provider.dart';
 import 'package:spotify_api/widgets/artist_albums.dart';
 import 'package:spotify_api/widgets/artist_info.dart';
 import 'package:spotify_api/widgets/homescreen_playlist.dart';
+import 'package:spotify_api/widgets/shimmer_albums.dart';
 import 'package:spotify_api/widgets/shimmer_artist_photo.dart';
 import 'package:spotify_api/widgets/shimmer_playlist.dart';
 import 'package:spotify_api/widgets/shimmer_song.dart';
@@ -87,7 +88,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
                                       '${value.artistAlbumData!.items![index].name}',
                                 );
                               },
-                            ): SSong(),
+                            ): SAlbums(),
                           ),
                         );
                       },

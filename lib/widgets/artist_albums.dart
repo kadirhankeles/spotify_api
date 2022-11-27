@@ -23,7 +23,7 @@ class _AAlbumsState extends State<AAlbums> {
           Container(
             height: 14.h,
             width: 15.h,
-            decoration: AppConstant().profilePhoto("${widget.imagePath}", 20),
+            child: AppConstant().profilePhotos("${widget.imagePath}", 20),
           ),
           SizedBox(height: 1.h,),
           Text("${widget.name}",maxLines: 2,overflow: TextOverflow.ellipsis, style: AppConstant().albumsStyle,)

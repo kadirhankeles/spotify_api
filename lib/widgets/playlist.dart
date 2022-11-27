@@ -21,7 +21,7 @@ class Playlist extends StatelessWidget {
             Container(
               height: 6.h,
               width: 6.h,
-              decoration: AppConstant().profilePhoto(imagePath, 10) ,
+              child: AppConstant().profilePhotos(imagePath, 10),
             ),
             Container(
               height: 8.h,

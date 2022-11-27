@@ -3,14 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/providers/artist_album_provider.dart';
 import 'package:spotify_api/providers/artist_provider.dart';
+import 'package:spotify_api/providers/artist_track_provider.dart';
 import 'package:spotify_api/providers/main_provider.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
+import 'package:spotify_api/providers/several_browse_provider.dart';
 import 'package:spotify_api/providers/top_track_provider.dart';
 import 'package:spotify_api/screens/artist_screen.dart';
 import 'package:spotify_api/screens/home_screen.dart';
 import 'package:spotify_api/screens/profile_screen.dart';
+import 'package:spotify_api/screens/search_screen.dart';
 
 void main() {
   runApp(MultiProvider(child: MyApp(),providers:[
@@ -21,6 +24,8 @@ void main() {
     ChangeNotifierProvider(create: (context) => ArtistProvider(),),
     ChangeNotifierProvider(create: (context) => ArtistAlbumProvider(),),
     ChangeNotifierProvider(create: (context) => MainProvider(),),
+    ChangeNotifierProvider(create: (context) => SeveralBrowseProvider(),),
+    ChangeNotifierProvider(create: (context) => ArtistTrackProvider(),),
   ]));
 }
 
@@ -67,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
   
   final List<Widget> _choice = [
     HomeScreen(),
-    ArtistScreen(id: "3VooEK5HkkcSc4Tv7FCBzb",),
+    SearchScreen(),
     ProfileScreen(),
   ];
   

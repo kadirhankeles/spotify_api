@@ -28,7 +28,8 @@ class _HSongState extends State<HSong> {
             Container(
               height: 21.h,
               width: double.infinity,
-              decoration: AppConstant().profilePhoto("${widget.imagePath}", 25),
+              child: AppConstant().profilePhotos("${widget.imagePath}", 25),
+
             ),
             SizedBox(height: 1.h,),
             Padding(

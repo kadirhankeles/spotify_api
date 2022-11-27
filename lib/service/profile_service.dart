@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 import '../core/api_key.dart';
@@ -14,10 +15,10 @@ Future<ProfileModel> getProfileService() async {
     'Authorization': 'Bearer $apiKey',
   };
 
-  var url = Uri.parse('https://api.spotify.com/v1/me');
-  var res = await http.get(url, headers: headers);
+  var url = 'https://api.spotify.com/v1/me';
+  var res = await Dio().get(url, options: Options(headers: headers));
   if (res.statusCode != 200) throw Exception('http.get error: statusCode= ${res.statusCode}');
-  data = ProfileModel.fromJson(jsonDecode(res.body));
+  data = ProfileModel.fromJson(res.data);
   return data;
  
 }
