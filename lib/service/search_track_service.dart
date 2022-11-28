@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:spotify_api/core/api_key.dart';
 import 'package:spotify_api/models/search_track_model.dart';
+import 'package:http/http.dart' as http;
+
 
 Future<SearchTrackModel?> GetSearchTrackService(String search) async {
+  SearchTrackModel? searchTrackData = SearchTrackModel();
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': '$apiKey',
+    'Authorization': 'Bearer $apiKey',
   };
 
   var params = {
@@ -18,12 +23,11 @@ Future<SearchTrackModel?> GetSearchTrackService(String search) async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  SearchTrackModel? searchTrackData = SearchTrackModel();
-    var url = 'https://api.spotify.com/v1/search?$query';
-    
-  var res = await Dio().get(url, options: Options(headers: headers));
-  searchTrackData = SearchTrackModel.fromJson(res.data);
-  
+  var url = Uri.parse('https://api.spotify.com/v1/search?$query');
+  var res = await http.get(url, headers: headers);
+  if (res.statusCode != 200) throw Exception('http.get error: statusCode= ${res.statusCode}');
+  searchTrackData = SearchTrackModel.fromJson(jsonDecode(res.body));
   return searchTrackData;
+
   
 }

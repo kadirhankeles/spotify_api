@@ -4,6 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/models/artist_track_model.dart';
 import 'package:spotify_api/providers/artist_track_provider.dart';
+import 'package:spotify_api/providers/search_track_provider.dart';
 import 'package:spotify_api/providers/several_browse_provider.dart';
 import 'package:spotify_api/widgets/search_category.dart';
 import 'package:spotify_api/widgets/search_list.dart';
@@ -53,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ), 
               
                Consumer(
-                builder: (context, ArtistTrackProvider value, child) {
+                builder: (context, SearchTrackProvider value, child) {
                   return value.isActive==false? Container(
                   child: Column(
                     children: [

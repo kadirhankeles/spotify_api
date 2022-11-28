@@ -17,7 +17,8 @@ class SearchList extends StatefulWidget {
 class _SearchListState extends State<SearchList> {
   ArtistTrackProvider? artistTrackData;
   SearchTrackProvider? searchTrackData;
-
+  late String dakika;
+  late String saniye;
  
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _SearchListState extends State<SearchList> {
                                 
                               ),
                               SizedBox(height: 1.h,),
-                              Center(child: Text("${value.artistTrackData!.artists!.items![index].name}",maxLines: 1, overflow: TextOverflow.ellipsis,),),
+                              Center(child: Text("${value.artistTrackData!.artists!.items![index].name}",maxLines: 1, overflow: TextOverflow.ellipsis, style: AppConstant().albumsStyle,),),
                             ],
                           ),
                         ),
@@ -91,10 +92,20 @@ class _SearchListState extends State<SearchList> {
                           SizedBox(width: 2.h,),
                           Container(
                             width: 33.h,
-                            child:Column(children: [
-                             // Text("${value.searchTrackData!.tracks!.items![index].album!.name}", maxLines: 1, overflow: TextOverflow.ellipsis,),
-                              //Text("${value.searchTrackData!.tracks!.items![index].album!.artists![0].name}")
-                            ],) ),
+                            child:Row(
+                              children: [
+                                Container(
+                                  width: 28.h,
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                  Text("${value.searchTrackData!.tracks!.items![index].album!.name}", maxLines: 1, overflow: TextOverflow.ellipsis, style: AppConstant().profileTitle,),
+                                  Text("${value.searchTrackData!.tracks!.items![index].album!.artists![0].name}", style: AppConstant().artistStyle,)
+                                  ],),
+                                ),
+                                Text("${DakikayaCevir("${value.searchTrackData!.tracks!.items![index].durationMs}")}", style: AppConstant().profileTitle,)
+                              ],
+                            ) ),
                         ],
                       ),
                     );
@@ -107,5 +118,17 @@ class _SearchListState extends State<SearchList> {
               ),
         );
       
+  }
+  
+  String DakikayaCevir(String sure) {
+    String bos="";
+    double atamaIki=0.0;
+    double atama = double.parse(sure);
+    assert(atama is double);
+    atamaIki = atama/60000;
+    bos=atamaIki.toStringAsFixed(2).replaceAll('.', ":");
+    return bos;
+
+
   }
 }
