@@ -10,7 +10,8 @@ class ReleasesProvider extends ChangeNotifier{
   bool isReleasesDataLoaded=false;
 
   GetReleasesData() async {
-    releasesData=await getReleasesService();
+     isReleasesDataLoaded=false;
+         releasesData=await getReleasesService();
     isReleasesDataLoaded=true;
     notifyListeners();
   }

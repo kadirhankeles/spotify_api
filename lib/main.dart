@@ -8,6 +8,7 @@ import 'package:spotify_api/providers/main_provider.dart';
 import 'package:spotify_api/providers/playlist_provider.dart';
 import 'package:spotify_api/providers/profile_provider.dart';
 import 'package:spotify_api/providers/releases_provider.dart';
+import 'package:spotify_api/providers/search_track_provider.dart';
 import 'package:spotify_api/providers/several_browse_provider.dart';
 import 'package:spotify_api/providers/top_track_provider.dart';
 import 'package:spotify_api/screens/artist_screen.dart';
@@ -26,6 +27,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => MainProvider(),),
     ChangeNotifierProvider(create: (context) => SeveralBrowseProvider(),),
     ChangeNotifierProvider(create: (context) => ArtistTrackProvider(),),
+    ChangeNotifierProvider(create: (context) => SearchTrackProvider(),),
   ]));
 }
 

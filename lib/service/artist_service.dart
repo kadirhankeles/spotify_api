@@ -13,13 +13,11 @@ Future<ArtistModel?> getArtistService(String id) async {
     'Authorization': 'Bearer $apiKey',
   };
 
-  try{
+  
   var url = 'https://api.spotify.com/v1/artists/$id';
   var res = await Dio().get(url, options: Options(headers: headers));
   if (res.statusCode != 200) throw Exception('http.get error: statusCode= ${res.statusCode}');
   artistData = ArtistModel.fromJson(res.data);
   return artistData;
-  }catch(e){
-    print(e.toString());
-  }
+  
 }

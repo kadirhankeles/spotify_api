@@ -1,34 +1,29 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:spotify_api/core/api_key.dart';
-import 'package:spotify_api/models/artist_track_model.dart';
+import 'package:spotify_api/models/search_track_model.dart';
 
-Future<ArtistAndTrackModel?> GetArtistAndTrackService(String search) async {
-  
+Future<SearchTrackModel?> GetSearchTrackService(String search) async {
   var headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer $apiKey',
+    'Authorization': '$apiKey',
   };
 
   var params = {
     'q': '$search',
-    'type': 'artist',
+    'type': 'track',
     'market': 'TR',
     'limit': '10',
     'offset': '0',
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  ArtistAndTrackModel? artistAndTrackData = ArtistAndTrackModel();
+  SearchTrackModel? searchTrackData = SearchTrackModel();
     var url = 'https://api.spotify.com/v1/search?$query';
+    
   var res = await Dio().get(url, options: Options(headers: headers));
-  artistAndTrackData = ArtistAndTrackModel.fromJson(res.data);
+  searchTrackData = SearchTrackModel.fromJson(res.data);
   
-  return artistAndTrackData;
-  
-
+  return searchTrackData;
   
 }

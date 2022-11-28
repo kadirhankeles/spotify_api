@@ -20,13 +20,11 @@ Future<PlaylistModel?> getPlaylistService() async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  try{PlaylistModel playlistData =PlaylistModel();
+    PlaylistModel playlistData =PlaylistModel();
     var url = 'https://api.spotify.com/v1/users/8kdfzahazbluvjd5tc99367gz/playlists?$query';
     var res = await Dio().get(url, options: Options(headers: headers));
     playlistData = PlaylistModel.fromJson(res.data);
     return playlistData;
-  }catch(e){
-    print(e.toString());
-  }
+  
 
 }

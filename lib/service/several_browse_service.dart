@@ -20,13 +20,11 @@ Future<SeveralBrowseModel?> getSeveralBrowseService() async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  try{  SeveralBrowseModel? data = SeveralBrowseModel();
+   SeveralBrowseModel? data = SeveralBrowseModel();
     var url = 'https://api.spotify.com/v1/browse/categories?$query';
     var res = await Dio().get(url, options: Options(headers: headers));
     data = SeveralBrowseModel.fromJson(res.data);
     return data;
-  }catch(e){
-    print(e.toString());
-  }
+ 
 
 }

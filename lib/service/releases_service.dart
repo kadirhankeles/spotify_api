@@ -22,14 +22,12 @@ Future<ReleasesModel?> getReleasesService() async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  try{
+  
     ReleasesModel? data;
     var url = 'https://api.spotify.com/v1/browse/new-releases?$query';
     var res = await Dio().get(url, options: Options(headers: headers));
     data = ReleasesModel.fromJson(res.data);
     return data;
-  }catch(e){
-    print(e.toString());
-  }
+ 
 }
 

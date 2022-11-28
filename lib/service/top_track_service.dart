@@ -20,15 +20,13 @@ Future<TopTracksModel?> getTopTracksService(String id) async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
     
-  try{TopTracksModel? data = TopTracksModel();
+  TopTracksModel? data = TopTracksModel();
     var url = 'https://api.spotify.com/v1/artists/$id/top-tracks?$query';
     var res = await Dio().get(url, options: Options(headers: headers));
 
     data = TopTracksModel.fromJson(res.data);
     return data;
-  }catch(e){
-    print(e.toString());
-  }
+  
 
   
   

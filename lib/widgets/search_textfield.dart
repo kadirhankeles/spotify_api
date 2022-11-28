@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:spotify_api/core/constant.dart';
 import 'package:spotify_api/providers/artist_album_provider.dart';
+import 'package:spotify_api/providers/search_track_provider.dart';
 import 'package:spotify_api/screens/search_screen.dart';
 import 'package:spotify_api/widgets/search_list.dart';
 
@@ -47,10 +48,15 @@ class _STextFieldState extends State<STextField> {
         onChanged: (value) {
           if(value.length > 2){
             Provider.of<ArtistTrackProvider>(context, listen: false).textActive(true);
-            print("Yollanan Değer: "+value);
+            
             Provider.of<ArtistTrackProvider>(context, listen: false).GetArtistTrackData(value);
+
+            Provider.of<SearchTrackProvider>(context,listen: false).textActive(true);
+            Provider.of<SearchTrackProvider>(context, listen: false).GetSearchTrackData(value);
+            print("Giden Değer"+ value );
           }else{
             Provider.of<ArtistTrackProvider>(context, listen: false).textActive(false);
+            Provider.of<SearchTrackProvider>(context, listen: false).textActive(false);
           }
         },
       ),

@@ -21,13 +21,11 @@ Future<ArtistAlbumModel?> getArtistAlbumService(String id) async {
   };
   var query = params.entries.map((p) => '${p.key}=${p.value}').join('&');
 
-  try{ArtistAlbumModel? artistAlbumData;
+  ArtistAlbumModel? artistAlbumData;
     var url = 'https://api.spotify.com/v1/artists/$id/albums?$query';
     var res = await Dio().get(url, options: Options(headers: headers));
     artistAlbumData = ArtistAlbumModel.fromJson(res.data);
     return artistAlbumData;
-  }catch(e){
-    print(e.toString());
-  }
+  
 
 }
